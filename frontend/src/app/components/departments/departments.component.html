@@ -5,6 +5,7 @@
                 <div class="card-content">
                     <form #departmentForm="ngForm" (ngSubmit)="addDepartment
                     (departmentForm)">
+                    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="departmentService.selectedDepartment._id">
                         <div class="row">
                                 <div class="input-field col s12">
                                     <input type="text" name="item" 
@@ -55,7 +56,13 @@
                                     <input type="file" placeholder="Imagen" name="imagen" style="margin:0 auto; width: 300px;margin-bottom: 45px;"
                                     id="images">
                                 </div>
-                                
+                                <div class="card-action">
+                                    <div class="input-field col s12">
+                                        <button class="btn right" (click)="resetForm(departmentForm)">Clean</button>
+                                        <button class="btn right" style="margin-right: 2px">Save</button>
+                                        
+                                    </div>
+                                </div>
                         </div>
                         
                     </form>
@@ -63,7 +70,40 @@
             </div>
         </div>
         <div class="col s7">
-            
+           <table>
+               <thead>
+                <th>Name</th>
+                <th>City</th>
+                <th>Guests</th>
+                <th>Beds</th>
+                <th>Baths</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Amenities</th>
+                <th>Occupied</th>
+               </thead>
+               <tbody>
+                <tr *ngFor="let department of data[0]">
+                    <td>{{ department.item}}</td>
+                    <td>{{ department.city }}</td>
+                    <td>{{ department.guests }}</td>
+                    <td>{{ department.beds }}</td>
+                    <td>{{ department.baths }}</td>
+                    <td>{{ department.price }}</td>
+                    <td>{{ department.type }}</td>
+                    <td>{{ department.amenities }}</td>
+                    <td>{{ department.occupied }}</td>
+                    <td>
+                        <a (click)="editDepartment(department)">
+                            <i class="material-icons">edit</i>
+                        </a>
+                        <a (click)="deleteDepartment(department._id)">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </td>
+                </tr>
+               </tbody>
+           </table> 
         </div>
     </div>
 </div>    

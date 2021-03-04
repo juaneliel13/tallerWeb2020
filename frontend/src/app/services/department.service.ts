@@ -7,14 +7,14 @@ import {Department} from '../models/department'
 export class DepartmentService {
 
   selectedDepartment: Department;
-  //departments: Department[];
-  readonly URL_API= "http://localhost:3000/api/department";
+  departments: any[]=[];
+  readonly URL_API= "http://localhost:3000/api/department/";
   constructor(private http: HttpClient) {
     this.selectedDepartment=new Department();
    }
 
   getDepartments() {
-    return this.http.get(this.URL_API)
+    return this.http.get<Department[]>(this.URL_API);
   }
 
   postDepartment(Department:Department) {
@@ -26,6 +26,6 @@ export class DepartmentService {
   }
 
   deleteDepartment(_id: String){
-    return this.http.delete(this.URL_API + `${_id}`)
+    return this.http.delete(this.URL_API +'deleteDepartment'+ `/?_id=${_id}`);
   }
 }

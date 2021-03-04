@@ -7,7 +7,7 @@ router.post('/',departmentCtrl.addDepartment);
 router.get('/:item',departmentCtrl.getDepartment);
 router.get('/search/',departmentCtrl.searchDepartments);
 router.get('/filter/',departmentCtrl.filter);
-router.put('/deleteDepartment/',departmentCtrl.deleteDepartment);
+router.delete('/deleteDepartment/',departmentCtrl.deleteDepartment);
 router.put('/:departmentId',departmentCtrl.updateDepartment);
 router.put('/update/',departmentCtrl.updateDepartments);
 router.put('/updateOccupied/',departmentCtrl.updateOccupied);
