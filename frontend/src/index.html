@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <title>Frontend</title>
@@ -9,11 +9,25 @@
    <!-- Compiled and minified CSS -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    
 </head>
 <body>
   <app-root></app-root>
       <!-- Compiled and minified JavaScript -->
+      <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script type="text/JavaScript">
+        $(document).ready(function(){
+        $('select').formSelect();
+        });
+       
+        $(document).ready(function() {
+    $('input#input_text, textarea#textarea2').characterCounter();
+  });
+        
+      
+        
+      </script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 </body>
 </html>

@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const departmentCtrl = require('../controllers/department.controller.js');
 router.get('/', departmentCtrl.findAll);

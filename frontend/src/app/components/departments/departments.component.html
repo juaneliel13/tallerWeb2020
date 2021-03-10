@@ -1,60 +1,95 @@
 <div class="container">
     <div class="row">
         <div class="col s5">
-            <div class="card">
+            <div  class="card #b0bec5 blue-grey lighten-3">
                 <div class="card-content">
                     <form #departmentForm="ngForm" (ngSubmit)="addDepartment
                     (departmentForm)">
                     <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="departmentService.selectedDepartment._id">
                         <div class="row">
+                            
                                 <div class="input-field col s12">
                                     <input type="text" name="item" 
                                     #item="ngModel" [ngModel]="departmentService.selectedDepartment.item"
-                                    id="name" placeholder="">
+                                    id="name" placeholder="" autocomplete="nope">
                                     <label for="name">Name</label>
                                 </div>
+                            
+                              
                                 <div class="input-field col s12">
                                         <input type="text" name="city" 
                                         #item="ngModel" [ngModel]="departmentService.selectedDepartment.city"
-                                        id="city" placeholder="">
+                                        id="city" placeholder=""  autocomplete="nope">
                                         <label for="city">City</label>
-                                    </div>
-                                <div class="input-field col s12">
+                                </div>
+                               <div class="col s4">
+                                <div class="input-field">
                                     <input type="number" name="guests" min=0
                                     #guests="ngModel" [ngModel]="departmentService.selectedDepartment.guests"
-                                    placeholder="" id="guests">
+                                    placeholder="" id="guests" >
                                     <label for="guests">Guests</label>
                                 </div>
-                                <div class="input-field col s12">
-                                    <input type="number" name="beds" min=0
-                                    #guest="ngModel" [ngModel]="departmentService.selectedDepartment.beds"
-                                    placeholder="Enter Beds" id="beds">
-                                    <label for="beds">Beds</label>
                                 </div>
-                                <div class="input-field col s12">
+                                <div class="col s4">
+                                    <div class="input-field">
+                                        <input type="number" name="beds" min=0
+                                        #guest="ngModel" [ngModel]="departmentService.selectedDepartment.beds"
+                                        placeholder="Enter Beds" id="beds">
+                                        <label for="beds">Beds</label>
+                                    </div>
+                                </div>
+                            <div class="col s4">
+                                <div class="input-field">
                                     <input type="number" name="baths" min=0
                                     #baths="ngModel" [ngModel]="departmentService.selectedDepartment.baths"
                                     placeholder="Enter Baths" >
                                     <label for="baths">Baths</label>
                                 </div>
-                               <div class="input-field col s12">
+                            </div>
+                            <div class="col s5">
+                               <div class="input-field col">
                                         <input type="number" name="price" min=0 step=0.01 
                                         #baths="ngModel" [ngModel]="departmentService.selectedDepartment.price"
                                         placeholder="Enter Price" >
                                         <label for="price">Price</label>
                                 </div>
-                                <div class="input-field col s12">    
-                                    <input name="type" id="type" list="types"
-                                    #baths="ngModel" [ngModel]="departmentService.selectedDepartment.type">
-                                        <datalist id="types">
-                                        <option value="House">
-                                        <option value="Department">
-                                        </datalist>
-                                </div>              
-                                
-                                <div style="text-align: center" class="col s12">
+                            </div> 
+                            <div class="col s6">    
+                                <div class="input-field">
+                                        <select class="" ng-model="select.value1" material-select
+                                         name="type" #type="ngModel" [(ngModel)]="departmentService.selectedDepartment.type">
+                                               <option value="" disabled selected></option>
+                                               <option value="House">House</option>
+                                               <option value="Department">Department</option>
+                                            </select>
+                                            <label>Type</label>
+                                      
+                               </div>
+                            </div>   
+
+                                <div class="input-field col s12">
+                                         <select class="" ng-model="select.value3" material-select multiple watch
+                                          name="amenities" #amenities="ngModel" [(ngModel)]="departmentService.selectedDepartment.amenities">
+                                                <option value="" disabled selected></option>
+                                                <option value="WiFi">WiFi</option>
+                                                <option value="Conditioning Air">Conditioning Air</option>
+                                                <option value="Breakfast">Breakfast</option>
+                                             </select>
+                                             <label>Amenities</label>
+                                       
+                                </div>
+                               <!---<div style="text-align: center" class="col s12">
                                     <input type="file" placeholder="Imagen" name="imagen" style="margin:0 auto; width: 300px;margin-bottom: 45px;"
                                     id="images">
+                                </div>--->
+                                <div class="file-field input-field col s12">
+                                        <div class="btn">
+                                          <span>File</span>
+                                          <input type="file" multiple>
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                          <input class="file-path validate" type="text" placeholder="Upload one or more images">
+                                        </div>
                                 </div>
                                 <div class="card-action">
                                     <div class="input-field col s12">
@@ -69,8 +104,9 @@
                 </div>
             </div>
         </div>
-        <div class="col s7">
-           <table>
+        <div class="col s6">
+           <table class="highlight" >
+
                <thead>
                 <th>Name</th>
                 <th>City</th>
@@ -92,18 +128,25 @@
                     <td>{{ department.price }}</td>
                     <td>{{ department.type }}</td>
                     <td>{{ department.amenities }}</td>
-                    <td>{{ department.occupied }}</td>
+                    <td>{{ department.occupied }}
+                    </td>
+                    <h4 style="cursor: pointer">
                     <td>
-                        <a (click)="editDepartment(department)">
+                        <a (click)="editDepartment(department)" >
                             <i class="material-icons">edit</i>
                         </a>
                         <a (click)="deleteDepartment(department._id)">
                             <i class="material-icons">delete</i>
                         </a>
                     </td>
+                </h4>
                 </tr>
                </tbody>
            </table> 
         </div>
     </div>
 </div>    
+
+
+
+

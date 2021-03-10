@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+	font-size:80%;
+}
+
+/* porcentaje base, solo en el body */
+p {
+	font-size:0.9em;
+}
+h1 {
+	font-size:2em;
+}
+h2 {
+	font-size:1.4em;
+}
+#pie {
+	font-size:1.2em;
+}
+.epigrafes {
+	font-size:1.1em;
+}
+
+/* fin de zona común a todas las resoluciones */
+@media screen and (min-width:800px) {
+	body {
+		font-size:100%;
+		/* ampliamos los textos si mide más de 800px */
+	}
+}
+
+/* fin de la zona para más de 800px de ancho de pantalla */
+@media screen and (min-width:1200px) {
+	body {
+		font-size:120%;
+		/* ampliamos más aún los textos si mide más de 1200px */
+	}
+}

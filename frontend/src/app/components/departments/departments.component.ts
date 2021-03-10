@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { IfStmt } from '@angular/compiler';
 import { Department } from 'src/app/models/department';
 
+
 declare var M: any;
 
 @Component({
@@ -17,6 +18,14 @@ declare var M: any;
 export class DepartmentsComponent implements OnInit {
 
   data:any;
+  amenities:any;
+  valor1=null;
+  valor2=null;
+  resultado=null;
+  opcion1=false;
+  opcion2=false;
+  opcion3=false;
+  opcion4=false;
   constructor(public departmentService:DepartmentService) { }
 
   ngOnInit(){
@@ -25,21 +34,29 @@ export class DepartmentsComponent implements OnInit {
 
   addDepartment(form: NgForm) {
     if(form.value._id){
+      if(form.value.item==""){
+      M.toast({html:'Enter name'});
+      }
+      else{
       this.departmentService.putDepartment(form.value)
       .subscribe(res=>{
         this.resetForm(form);
         M.toast({html:'Updated Succesfully'});
         this.getDepartment();
       });
+    }
     }else{
+      if(form.value.item!=null && form.value.item!=""){
+        
       this.departmentService.postDepartment(form.value)
       .subscribe(res=>{
         console.log(form.value);
         this.resetForm(form);
-        
         M.toast({html:'Save Succesfully'});
         this.getDepartment();
       });
+    
+    }
     }
   }
 
@@ -71,4 +88,8 @@ export class DepartmentsComponent implements OnInit {
       this.departmentService.selectedDepartment=new Department();
     }
   }
+
+ 
+
+  
 }
