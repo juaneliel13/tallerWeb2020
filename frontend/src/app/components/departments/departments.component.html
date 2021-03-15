@@ -104,49 +104,62 @@
                 </div>
             </div>
         </div>
-        <div class="col s6">
-           <table class="highlight" >
-
-               <thead>
-                <th>Name</th>
-                <th>City</th>
-                <th>Guests</th>
-                <th>Beds</th>
-                <th>Baths</th>
-                <th>Price</th>
-                <th>Type</th>
-                <th>Amenities</th>
-                <th>Occupied</th>
-               </thead>
-               <tbody>
-                <tr *ngFor="let department of data[0]">
-                    <td>{{ department.item}}</td>
-                    <td>{{ department.city }}</td>
-                    <td>{{ department.guests }}</td>
-                    <td>{{ department.beds }}</td>
-                    <td>{{ department.baths }}</td>
-                    <td>{{ department.price }}</td>
-                    <td>{{ department.type }}</td>
-                    <td>{{ department.amenities }}</td>
-                    <td>{{ department.occupied }}
-                    </td>
-                    <h4 style="cursor: pointer">
-                    <td>
-                        <a (click)="editDepartment(department)" >
-                            <i class="material-icons">edit</i>
-                        </a>
-                        <a (click)="deleteDepartment(department._id)">
-                            <i class="material-icons">delete</i>
-                        </a>
-                    </td>
-                </h4>
-                </tr>
-               </tbody>
-           </table> 
+        <div class="container-section">
+            <div class="col s6">
+                <div class="input-field">
+                    <i class="material-icons prefix">search</i>
+                    <input type="text" id="buscar" class="autocomplete" >
+                    <label for="buscar">Buscar...</label>
+                    <button class="btn right" (click)="updateDepartmentsByCity()">Buscar</button>
+                </div>
+            </div>
+        </div>
+        <div class="container" id=respuesta>
+            <div class="col s6">
+                <table class="highlight" >
+                    <div *ngIf="data!=null">
+                    <thead>
+                     <th>Name</th>
+                     <th>City</th>
+                     <th>Guests</th>
+                     <th>Beds</th>
+                     <th>Baths</th>
+                     <th>Price</th>
+                     <th>Type</th>
+                     <th>Amenities</th>
+                     <th>Occupied</th>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let department of data[0]">
+                         <td>{{ department.item}}</td>
+                         <td>{{ department.city }}</td>
+                         <td>{{ department.guests }}</td>
+                         <td>{{ department.beds }}</td>
+                         <td>{{ department.baths }}</td>
+                         <td>{{ department.price }}</td>
+                         <td>{{ department.type }}</td>
+                         <td>{{ department.amenities }}</td>
+                         <td>{{ department.occupied }}
+                         </td>
+                         <h4 style="cursor: pointer">
+                         <td>
+                             <a (click)="editDepartment(department)" >
+                                 <i class="material-icons">edit</i>
+                             </a>
+                             <a (click)="deleteDepartment(department._id)">
+                                 <i class="material-icons">delete</i>
+                             </a>
+                             <a (click)="updateDepartmentsByCity()">
+                                <i class="material-icons">search</i>
+                            </a>
+                         </td>
+                     </h4>
+                     </tr>
+                    </tbody>
+                </div>
+                </table> 
+             </div>
         </div>
     </div>
-</div>    
-
-
-
+</div>
 

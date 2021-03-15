@@ -60,12 +60,20 @@ export class DepartmentsComponent implements OnInit {
     }
   }
 
+  updateDepartmentsByCity(){
+    var x = (<HTMLInputElement>document.getElementById("buscar")).value;
+    this.departmentService.findDepartmentsByCity(x)
+    .subscribe(res=>{
+      this.departmentService.departments=res;
+      this.data=Object.values(this.departmentService.departments);
+    });
+  }
+
   getDepartment(){
     this.departmentService.getDepartments()
     .subscribe(res=>{
       this.departmentService.departments=res;
       this.data=Object.values(this.departmentService.departments);
-      console.log(this.data);
     });
   }
 
@@ -88,8 +96,7 @@ export class DepartmentsComponent implements OnInit {
       this.departmentService.selectedDepartment=new Department();
     }
   }
-
- 
-
   
 }
+
+

@@ -26,7 +26,6 @@ departmentCtrl.searchDepartments=(req, res) => {
     var checkin=new Date(req.query.checkin)
     var checkout=new Date(req.query.checkout)
     var guests=req.query.guests
-    query.city=city
     query.guests=guests
 
     Department.find({ $and : [query,{$nor:[{$and:[{"occupied.checkin":{$lte:checkin}},{"occupied.checkout":{$gte:checkin }}]},
@@ -82,7 +81,7 @@ departmentCtrl.filter=(req, res) =>{
     }
     Department.find(query,(err,department) => {
 		if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
-	res.status(200).send({ department })
+        res.status(200).send({department})
     });
 };
 
