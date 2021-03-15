@@ -22,7 +22,7 @@ export class DepartmentService {
   }
 
   putDepartment(Department:Department){
-    return this.http.put(this.URL_API + `/${Department._id}`,Department);
+    return this.http.put(this.URL_API + `ids/${Department._id}`,Department);
   }
 
   deleteDepartment(_id: String){

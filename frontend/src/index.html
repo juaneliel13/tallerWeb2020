@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Frontend</title>
+  <title>RENTAL</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -23,6 +23,45 @@
         $(document).ready(function() {
     $('input#input_text, textarea#textarea2').characterCounter();
   });
+  $(document).ready(function(){
+    $('.timepicker').timepicker();
+  });
+  $(document).ready(function(){
+    $('.parallax').parallax();
+  });
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+  $(document).ready(function(){
+    $('.scrollspy').scrollSpy();
+  });
+  $(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
+
+  $(document).ready(function(){
+    $('input.autocomplete').autocomplete({
+      data: {
+          "Tandil": null,
+          "Mar del Plata": null,
+          "Buenos Aires": null,
+          "Bariloche": null,
+          "Mendoza": null,
+          "Villa La Angustura": null,
+          "Sierra de los Padres": null,
+
+        },
+    });
+  });
+  $(document).ready(function(){
+    $('.slider').slider({
+        indicators: false,
+        height: 500,
+        transition: 500,
+        interval: 6000
+      });
+  });
+       
       </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

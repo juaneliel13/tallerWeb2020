@@ -1,0 +1,9 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+export function IMyLocales() { }
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9jYWxlLmludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL25nLXVpa2l0LXByby1zdGFuZGFyZC8iLCJzb3VyY2VzIjpbImxpYi9wcm8vZGF0ZS1waWNrZXIvaW50ZXJmYWNlcy9sb2NhbGUuaW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFFQSxnQ0FFQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IElNeU9wdGlvbnMgfSBmcm9tICcuL29wdGlvbnMuaW50ZXJmYWNlJztcclxuXHJcbmV4cG9ydCBpbnRlcmZhY2UgSU15TG9jYWxlcyB7XHJcbiAgW2xhbmc6IHN0cmluZ106IElNeU9wdGlvbnM7XHJcbn1cclxuIl19

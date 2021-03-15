@@ -1,0 +1,34 @@
+  .body{
+    place-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+.table{
+     font-size: small;
+}  
+
+td {
+    text-align: center;
+  }
+
+  th {
+    text-align: center;
+  }  
+  
+  .slider .btn {
+    margin-top: 20px;
+  }
+  
+  .section-search input {
+    padding: 5px !important;
+    font-size: 18px !important;
+    width: 90% !important;
+    border: #f4f4f4 3px solid !important;
+  }
+  
+  .section-property h5 {
+    margin-bottom: 30px;
+  }
+  

@@ -14,7 +14,8 @@ const departmentSchema = Schema({
     price: Number,
     city: String,
     occupied: [{arrival: Date, departure: Date}],
-    imgUrl:String
+    checkin: String,
+    checkout: String
 })
 
 

@@ -19,13 +19,6 @@ export class DepartmentsComponent implements OnInit {
 
   data:any;
   amenities:any;
-  valor1=null;
-  valor2=null;
-  resultado=null;
-  opcion1=false;
-  opcion2=false;
-  opcion3=false;
-  opcion4=false;
   constructor(public departmentService:DepartmentService) { }
 
   ngOnInit(){
@@ -38,35 +31,37 @@ export class DepartmentsComponent implements OnInit {
       M.toast({html:'Enter name'});
       }
       else{
-      this.departmentService.putDepartment(form.value)
-      .subscribe(res=>{
-        this.resetForm(form);
-        M.toast({html:'Updated Succesfully'});
-        this.getDepartment();
-      });
+        form.value.checkin=(<HTMLInputElement>document.getElementById("checkin")).value;
+        form.value.checkout=(<HTMLInputElement>document.getElementById("checkout")).value;
+        this.departmentService.putDepartment(form.value)
+        .subscribe(res=>{
+          this.resetForm(form);
+          M.toast({html:'Updated Succesfully'});
+          console.log((<HTMLInputElement>document.getElementById("autocomplete-input")).value);
+          if((<HTMLInputElement>document.getElementById("autocomplete-input")).value==null || (<HTMLInputElement>document.getElementById("autocomplete-input")).value!="")
+            this.getDepartment();
+          else
+            this.updateDepartmentsByCity();  
+        });
     }
     }else{
+      form.value.checkin=(<HTMLInputElement>document.getElementById("checkin")).value;
+      form.value.checkout=(<HTMLInputElement>document.getElementById("checkout")).value;
       if(form.value.item!=null && form.value.item!=""){
-        
       this.departmentService.postDepartment(form.value)
       .subscribe(res=>{
         console.log(form.value);
         this.resetForm(form);
         M.toast({html:'Save Succesfully'});
-        this.getDepartment();
+        console.log((<HTMLInputElement>document.getElementById("autocomplete-input")).value);
+        if((<HTMLInputElement>document.getElementById("autocomplete-input")).value==null || (<HTMLInputElement>document.getElementById("autocomplete-input")).value=="")
+            this.getDepartment();
+          else
+            this.updateDepartmentsByCity();
       });
     
     }
     }
-  }
-
-  updateDepartmentsByCity(){
-    var x = (<HTMLInputElement>document.getElementById("buscar")).value;
-    this.departmentService.findDepartmentsByCity(x)
-    .subscribe(res=>{
-      this.departmentService.departments=res;
-      this.data=Object.values(this.departmentService.departments);
-    });
   }
 
   getDepartment(){
@@ -74,6 +69,7 @@ export class DepartmentsComponent implements OnInit {
     .subscribe(res=>{
       this.departmentService.departments=res;
       this.data=Object.values(this.departmentService.departments);
+      console.log(this.data);
     });
   }
 
@@ -86,7 +82,10 @@ export class DepartmentsComponent implements OnInit {
     this.departmentService.deleteDepartment(_id)
     .subscribe(res=>{
       M.toast({html:'Deleted Succesfully'});
+      if((<HTMLInputElement>document.getElementById("autocomplete-input")).value==null || (<HTMLInputElement>document.getElementById("autocomplete-input")).value=="")
       this.getDepartment();
+    else
+      this.updateDepartmentsByCity();
     });
     
   }
@@ -96,7 +95,16 @@ export class DepartmentsComponent implements OnInit {
       this.departmentService.selectedDepartment=new Department();
     }
   }
+
+  updateDepartmentsByCity(){
+    var x = (<HTMLInputElement>document.getElementById("autocomplete-input")).value;
+    this.departmentService.findDepartmentsByCity(x)
+    .subscribe(res=>{
+      this.departmentService.departments=res;
+      this.data=Object.values(this.departmentService.departments);
+      console.log(x);
+    });
+  }
+
   
 }
-
-

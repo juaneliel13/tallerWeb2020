@@ -119,11 +119,9 @@ departmentCtrl.addDepartment=(req, res)=>{
     department.price=req.body.price
     department.city=req.body.city
     department.occupied=req.body.occupied
+    department.checkin=req.body.checkin
+    department.checkout=req.body.checkout
 
-    if(req.body.file){
-        const {filename}=req.body.file
-        department.setImgUrl(filename)
-    }
     department.save((err,departmentStored) => 
     {if (err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})
         res.status(200).send({department: departmentStored})

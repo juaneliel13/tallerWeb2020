@@ -1,165 +1,363 @@
-<div class="container">
-    <div class="row">
-        <div class="col s5">
-            <div  class="card #b0bec5 blue-grey lighten-3">
-                <div class="card-content">
-                    <form #departmentForm="ngForm" (ngSubmit)="addDepartment
-                    (departmentForm)">
-                    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="departmentService.selectedDepartment._id">
-                        <div class="row">
-                            
-                                <div class="input-field col s12">
-                                    <input type="text" name="item" 
-                                    #item="ngModel" [ngModel]="departmentService.selectedDepartment.item"
-                                    id="name" placeholder="" autocomplete="nope">
-                                    <label for="name">Name</label>
+
+      <div class="navbar-fixed">
+              <nav class="teal">
+                <div class="container">
+                  <div class="nav-wrapper">
+                    <a href="#!" class="brand-logo">Rental</a>
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                     <ul class="right hide-on-med-and-down">
+                      <li>
+                        <a href="#home">Home</a>
+                      </li>
+                      <li>
+                        <a href="#search">Search</a>
+                      </li>
+                      <li>
+                        <a href="#popular">Popular Places</a>
+                      </li>
+                      <li>
+                        <a href="#gallery">Gallery</a>
+                      </li>
+                      <li>
+                        <a href="#contact">Add Property</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          
+            <!-- Section: Slider -->
+            <section class="slider">
+              <ul class="slides">
+                <li>
+                  <img src="https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/uploadimages/29/37/29374446.jpeg" alt="">
+                  <div class="caption center-align">
+                    <h2>Take Your Dream Vacation</h2>
+
+                  </div>
+                </li>
+                <li>
+                  <img src="https://i.imgur.com/dyLTdWm.jpg" alt="">
+                  <div class="caption center-align">
+                    <h2>Enjoy the Moment</h2>
+                  </div>
+                </li>
+                <li>
+                  <img src="https://i.imgur.com/V6DsI3N.jpg" alt="">
+                  <div class="caption center-align">
+                    <h2>We Take Care of Everything</h2>
+                    
+                  </div>
+                </li>
+              </ul>
+            </section>
+          
+            <!-- Section: Search -->
+            <section id="search" class="section section-search teal darken-1 white-text center scrollspy">
+              <div class="container">
+                <div class="row">
+                  <div class="col s12">
+                    <h3>Search Destinations</h3>
+                    <div class="input-field">
+                      <input type="text" class="white grey-text autocomplete" placeholder="Tandil, Mar del Plata, etc..." type="text" id="autocomplete-input">
+                    </div>
+                  </div>
+                  <div class="col s12">
+                          <button class="btn" (click)="updateDepartmentsByCity()">Buscar</button>
+                  </div>
+                </div>
+              </div>
+              
+            </section>
+          
+            <!-- Section: Icon Boxes -->
+            <section class="section section-icons grey lighten-4 center">
+              <div class="container">
+                <div class="row">
+                      <div id="highlight" class="section scrollspy">
+                              <div class="row">
+                                <div class="col s12">
+                                  <div *ngIf="data!=null">
+                                  <table class="highlight">
+                                    <thead>
+                                      <tr>
+                                              <th>Name</th>
+                                              <th>City</th>
+                                              <th>Guests</th>
+                                              <th>Beds</th>
+                                              <th>Baths</th>
+                                              <th>Type</th>
+                                              <th>Amenities</th>
+                                              <th>Check-in</th>
+                                              <th>Check-out</th>
+                                              <th>Price</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                          <tr *ngFor="let department of data[0]">
+                                                  <td>{{ department.item}}</td>
+                                                  <td>{{ department.city }}</td>
+                                                  <td>{{ department.guests }}</td>
+                                                  <td>{{ department.beds }}</td>
+                                                  <td>{{ department.baths }}</td>
+                                                  <td>{{ department.type }}</td>
+                                                  <td>{{ department.amenities }}</td>
+                                                  <td>{{ department.checkin}}</td>
+                                                  <td>{{ department.checkout }}</td>
+                                                  <td>{{ "$" + department.price }}</td>
+                                                  
+                                                  <h4 style="cursor: pointer">
+                                                  <td>
+                                                      <a (click)="editDepartment(department)" >
+                                                          <i class="material-icons">edit</i>
+                                                      </a>
+                                                      <a (click)="deleteDepartment(department._id)">
+                                                          <i class="material-icons">delete</i>
+                                                      </a>
+                                                  </td>
+                                              </h4>
+                                              </tr>
+                                            
+                                    </tbody>
+                                  </table>
                                 </div>
-                            
-                              
-                                <div class="input-field col s12">
-                                        <input type="text" name="city" 
-                                        #item="ngModel" [ngModel]="departmentService.selectedDepartment.city"
-                                        id="city" placeholder=""  autocomplete="nope">
-                                        <label for="city">City</label>
-                                </div>
-                               <div class="col s4">
-                                <div class="input-field">
-                                    <input type="number" name="guests" min=0
-                                    #guests="ngModel" [ngModel]="departmentService.selectedDepartment.guests"
-                                    placeholder="" id="guests" >
-                                    <label for="guests">Guests</label>
-                                </div>
-                                </div>
-                                <div class="col s4">
-                                    <div class="input-field">
-                                        <input type="number" name="beds" min=0
-                                        #guest="ngModel" [ngModel]="departmentService.selectedDepartment.beds"
-                                        placeholder="Enter Beds" id="beds">
-                                        <label for="beds">Beds</label>
-                                    </div>
-                                </div>
-                            <div class="col s4">
-                                <div class="input-field">
-                                    <input type="number" name="baths" min=0
-                                    #baths="ngModel" [ngModel]="departmentService.selectedDepartment.baths"
-                                    placeholder="Enter Baths" >
-                                    <label for="baths">Baths</label>
                                 </div>
                             </div>
-                            <div class="col s5">
-                               <div class="input-field col">
-                                        <input type="number" name="price" min=0 step=0.01 
-                                        #baths="ngModel" [ngModel]="departmentService.selectedDepartment.price"
-                                        placeholder="Enter Price" >
-                                        <label for="price">Price</label>
-                                </div>
-                            </div> 
-                            <div class="col s6">    
-                                <div class="input-field">
-                                        <select class="" ng-model="select.value1" material-select
-                                         name="type" #type="ngModel" [(ngModel)]="departmentService.selectedDepartment.type">
-                                               <option value="" disabled selected></option>
-                                               <option value="House">House</option>
-                                               <option value="Department">Department</option>
-                                            </select>
-                                            <label>Type</label>
-                                      
-                               </div>
-                            </div>   
-
-                                <div class="input-field col s12">
-                                         <select class="" ng-model="select.value3" material-select multiple watch
-                                          name="amenities" #amenities="ngModel" [(ngModel)]="departmentService.selectedDepartment.amenities">
-                                                <option value="" disabled selected></option>
-                                                <option value="WiFi">WiFi</option>
-                                                <option value="Conditioning Air">Conditioning Air</option>
-                                                <option value="Breakfast">Breakfast</option>
-                                             </select>
-                                             <label>Amenities</label>
-                                       
-                                </div>
-                               <!---<div style="text-align: center" class="col s12">
-                                    <input type="file" placeholder="Imagen" name="imagen" style="margin:0 auto; width: 300px;margin-bottom: 45px;"
-                                    id="images">
-                                </div>--->
-                                <div class="file-field input-field col s12">
-                                        <div class="btn">
-                                          <span>File</span>
-                                          <input type="file" multiple>
-                                        </div>
-                                        <div class="file-path-wrapper">
-                                          <input class="file-path validate" type="text" placeholder="Upload one or more images">
-                                        </div>
-                                </div>
-                                <div class="card-action">
-                                    <div class="input-field col s12">
-                                        <button class="btn right" (click)="resetForm(departmentForm)">Clean</button>
-                                        <button class="btn right" style="margin-right: 2px">Save</button>
-                                        
-                                    </div>
-                                </div>
-                        </div>
-                        
-                    </form>
+                            </div>
                 </div>
-            </div>
-        </div>
-        <div class="container-section">
-            <div class="col s6">
-                <div class="input-field">
-                    <i class="material-icons prefix">search</i>
-                    <input type="text" id="buscar" class="autocomplete" >
-                    <label for="buscar">Buscar...</label>
-                    <button class="btn right" (click)="updateDepartmentsByCity()">Buscar</button>
+              </div>
+            </section>
+          
+            <!-- Section: Popular -->
+            <section id="popular" class="section section-popular scrollspy">
+              <div class="container">
+                <div class="row">
+                  <h4 class="center">
+                    <span class="teal-text">Popular</span> Places</h4>
+                  <div class="col s12 m4">
+                    <div class="card">
+                      <div class="card-image">
+                        <img src="https://i.imgur.com/nddjmfw.jpg" alt="">
+                        <span class="card-title">Bariloche</span>
+                      </div>
+                      <div class="card-content">
+                        <p>Admirar paisajes, hacer safaris fotográficos, esquiar, pescar, navegar o simplemente tomar unos mates frente a un lago son las actividades más buscadas por quienes visitan la ciudad de San Carlos de Bariloche.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12 m4">
+                    <div class="card">
+                      <div class="card-image">
+                        <img src="https://i.imgur.com/2GQ5bUp.jpg" alt="">
+                        <span class="card-title">Tandil</span>
+                      </div>
+                      <div class="card-content">
+                        <p>Tandil es una ciudad que lo tiene todo. Alojamientos: hoteles en Tandil, cabañas en Tandil, posadas, casas de campo, campings, spa. Gastronomía: restaurantes, bares, productos regionales, quesos, salamines, dulces. 
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12 m4">
+                    <div class="card">
+                      <div class="card-image">
+                        <img src="https://i.imgur.com/MMd4YSa.jpg" alt="">
+                        <span class="card-title">Buenos Aires</span>
+                      </div>
+                      <div class="card-content">
+                        <p>Buenos Aires, una gran urbe de carácter cosmopolita que se ha convertido en una de las ciudades más importantes y atractivas de Latinoamérica. Es una ciudad moderna que ha sabido conservar sus antiguas tradiciones.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-        <div class="container" id=respuesta>
-            <div class="col s6">
-                <table class="highlight" >
-                    <div *ngIf="data!=null">
-                    <thead>
-                     <th>Name</th>
-                     <th>City</th>
-                     <th>Guests</th>
-                     <th>Beds</th>
-                     <th>Baths</th>
-                     <th>Price</th>
-                     <th>Type</th>
-                     <th>Amenities</th>
-                     <th>Occupied</th>
-                    </thead>
-                    <tbody>
-                     <tr *ngFor="let department of data[0]">
-                         <td>{{ department.item}}</td>
-                         <td>{{ department.city }}</td>
-                         <td>{{ department.guests }}</td>
-                         <td>{{ department.beds }}</td>
-                         <td>{{ department.baths }}</td>
-                         <td>{{ department.price }}</td>
-                         <td>{{ department.type }}</td>
-                         <td>{{ department.amenities }}</td>
-                         <td>{{ department.occupied }}
-                         </td>
-                         <h4 style="cursor: pointer">
-                         <td>
-                             <a (click)="editDepartment(department)" >
-                                 <i class="material-icons">edit</i>
-                             </a>
-                             <a (click)="deleteDepartment(department._id)">
-                                 <i class="material-icons">delete</i>
-                             </a>
-                             <a (click)="updateDepartmentsByCity()">
-                                <i class="material-icons">search</i>
-                            </a>
-                         </td>
-                     </h4>
-                     </tr>
-                    </tbody>
+              </div>
+            </section>
+          
+           
+          
+            <!-- Section: Gallery -->
+            <section id="gallery" class="section section-gallery scrollspy">
+              <div class="container">
+                <h4 class="center">
+                  <span class="teal-text">Photo </span> Gallery
+                </h4>
+                <div class="row">
+                  <div class="col s12 m3">
+                    <img class="materialboxed responsive-img" src="https://i.imgur.com/zrWAKKB.jpg" alt="">
+                  </div>
+                  <div class="col s12 m3">
+                    <img class="materialboxed responsive-img" src="https://i.imgur.com/KAfRjMD.jpg" alt="">
+                  </div>
+                  <div class="col s12 m3">
+                    <img class="materialboxed responsive-img" src="https://i.imgur.com/lg4zBF1.jpg" alt="">
+                  </div>
+                  <div class="col s12 m3">
+                    <img class="materialboxed responsive-img" src="https://i.imgur.com/N51iDa7.jpg" alt="">
+                  </div>
                 </div>
-                </table> 
-             </div>
-        </div>
-    </div>
-</div>
-
+          
+                <div class="row">
+                  <div class="col s12 m3">
+                    <img class="materialboxed responsive-img" src="https://i.imgur.com/PecyNXv.jpg" alt="">
+                  </div>
+                  <div class="col s12 m3">
+                    <img class="materialboxed responsive-img" src="https://i.imgur.com/3lwteCf.jpg" alt="">
+                  </div>
+                  <div class="col s12 m3">
+                    <img class="materialboxed responsive-img" src="https://i.imgur.com/hkAWtSc.jpg" alt="">
+                  </div>
+                  <div class="col s12 m3">
+                    <img class="materialboxed responsive-img" src="https://i.imgur.com/PzCnWxt.jpg" alt="">
+                  </div>
+                </div>
+          
+                <div class="row">
+                  <div class="col s12 m3">
+                    <img class="materialboxed responsive-img" src="https://i.imgur.com/hyi8R8P.jpg" alt="">
+                  </div>
+                  <div class="col s12 m3">
+                    <img class="materialboxed responsive-img" src="https://i.imgur.com/OESyVk4.jpg" alt="">
+                  </div>
+                  <div class="col s12 m3">
+                    <img class="materialboxed responsive-img" src="https://i.imgur.com/haDzXAi.jpg" alt="">
+                  </div>
+                  <div class="col s12 m3">
+                    <img class="materialboxed responsive-img" src="https://i.imgur.com/g1EQZML.jpg" alt="">
+                  </div>
+                </div>
+              </div>
+            </section>
+          
+            <!-- Section: Contact -->
+            <section id="contact" class="section section-property scrollspy">
+              <div class="container">
+                <div class="row">
+                  <div class="col s12 m6">
+                    <div class="card-panel teal white-text center">
+                      <i class="material-icons medium">email</i>
+                      <h5>Contact Us For Booking</h5>
+                      <p>info@rental.com</p>
+                    </div>
+                    <ul class="collection with-header">
+                      <li class="collection-header">
+                        <h4>Location</h4>
+                      </li>
+                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.8511584646926!2d-59.08450508490785!3d-37.32235321385609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9590e0389a213c5d%3A0xcff9aea03c955932!2sUNICEN%20-%20Campus%20Universitario!5e0!3m2!1ses-419!2sar!4v1615846978656!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </ul>
+                  </div>
+                  <div class="col s12 m6">
+                    <div class="card-panel #009688 teal">
+                          <div  class="card ">
+                                  <div class="card-content">
+                                      <form #departmentForm="ngForm" (ngSubmit)="addDepartment
+                                      (departmentForm)">
+                                      <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="departmentService.selectedDepartment._id">
+                                          <div class="row">
+                                              
+                                                  <div class="input-field col s6">
+                                                      <input type="text" name="item" 
+                                                      #item="ngModel" [ngModel]="departmentService.selectedDepartment.item"
+                                                      id="name" placeholder="" autocomplete="nope">
+                                                      <label for="name">Name</label>
+                                                  </div>
+                                              
+                                                
+                                                  <div class="input-field col s6">
+                                                          <input type="text" name="city" 
+                                                          #item="ngModel" [ngModel]="departmentService.selectedDepartment.city"
+                                                          id="city" placeholder=""  autocomplete="nope">
+                                                          <label for="city">City</label>
+                                                  </div>
+                                                 <div class="col s4">
+                                                  <div class="input-field">
+                                                      <input type="number" name="guests" min=0
+                                                      #guests="ngModel" [ngModel]="departmentService.selectedDepartment.guests"
+                                                      placeholder="" id="guests" >
+                                                      <label for="guests">Guests</label>
+                                                  </div>
+                                                  </div>
+                                                  <div class="col s4">
+                                                      <div class="input-field">
+                                                          <input type="number" name="beds" min=0
+                                                          #guest="ngModel" [ngModel]="departmentService.selectedDepartment.beds"
+                                                          placeholder="" id="beds">
+                                                          <label for="beds">Beds</label>
+                                                      </div>
+                                                  </div>
+                                              <div class="col s4">
+                                                  <div class="input-field">
+                                                      <input type="number" name="baths" min=0
+                                                      #baths="ngModel" [ngModel]="departmentService.selectedDepartment.baths"
+                                                      placeholder="" >
+                                                      <label for="baths">Baths</label>
+                                                  </div>
+                                              </div>
+                                              <div class="col s5">
+                                                 <div class="input-field col">
+                                                          <input type="number" name="price" min=0 step=0.01 
+                                                          #baths="ngModel" [ngModel]="departmentService.selectedDepartment.price"
+                                                          placeholder="" >
+                                                          <label for="price">Price</label>
+                                                  </div>
+                                              </div> 
+                                              <div class="col s6">    
+                                                  <div class="input-field">
+                                                          <select class="" ng-model="select.value1" material-select
+                                                           name="type" #type="ngModel" [(ngModel)]="departmentService.selectedDepartment.type">
+                                                                 <option value="" disabled selected></option>
+                                                                 <option value="House">House</option>
+                                                                 <option value="Department">Department</option>
+                                                              </select>
+                                                              <label>Type</label>
+                                                        
+                                                 </div>
+                                              </div>   
+                  
+                                                  <div class="input-field col s12">
+                                                           <select class="" ng-model="select.value3" material-select multiple watch
+                                                            name="amenities" #amenities="ngModel" [(ngModel)]="departmentService.selectedDepartment.amenities">
+                                                                  <option value="" disabled selected></option>
+                                                                  <option value="WiFi">WiFi</option>
+                                                                  <option value="Conditioning Air">Conditioning Air</option>
+                                                                  <option value="Breakfast">Breakfast</option>
+                                                               </select>
+                                                               <label>Amenities</label>
+                                                         
+                                                  </div>
+                                                  <div class="input-field col s6">
+                                                  <input type="text" class="timepicker" id="checkin" name="checkin" #checkin="ngModel" [ngModel]="departmentService.selectedDepartment.checkin"
+                                                  autocomplete="nope">
+                                                  <label for="checkin">Check-in</label>
+                                                  </div>
+                                              
+                                                  <div class="input-field col s6">
+                                                  <input type="text" class="timepicker" id="checkout" name="checkout" #checkout="ngModel" [ngModel]="departmentService.selectedDepartment.checkout"
+                                                  autocomplete="nope">
+                                                  <label for="checkout">Check-out</label>
+                                                  </div>
+                  
+                                                  <div class="card-action">
+                                                      <div class="input-field col s12">
+                                                          <button class="btn right" (click)="resetForm(departmentForm)">Clean</button>
+                                                          <button class="btn right" style="margin-right: 2px">Save</button>
+                                                          
+                                                      </div>
+                                                  </div>
+                                          </div>
+                                          
+                                      </form>
+                                  </div>
+                              </div>
+                            </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          
+            <!-- Footer -->
+            <footer class="section teal darken-2 white-text center">
+              <p class="flow-text">Rental 2021</p>
+            </footer>
