@@ -9,8 +9,6 @@ departmentCtrl.findAll = (req,res) => {
     res.status(200).send({ department })
     });
 }
-
-
 departmentCtrl.getDepartment=(req, res) => {
     let departmentId= req.params.departmentId
     Department.find(item,(err,department) => {
@@ -19,7 +17,6 @@ departmentCtrl.getDepartment=(req, res) => {
     res.status(200).send({ department })
         });
 };
-
 departmentCtrl.searchDepartments=(req, res) => {
     var query={}
     var city=req.query.city
@@ -37,7 +34,6 @@ departmentCtrl.searchDepartments=(req, res) => {
         res.status(200).send({ department })  
         });
 };
-
 departmentCtrl.filter=(req, res) =>{
     var query={}
     var query2={}
@@ -84,7 +80,6 @@ departmentCtrl.filter=(req, res) =>{
         res.status(200).send({department})
     });
 };
-
 departmentCtrl.deleteDepartment=(req, res) =>{
     let id= req.query._id
 	Department.findById(id,(err,department) => {
@@ -99,7 +94,6 @@ departmentCtrl.deleteDepartment=(req, res) =>{
 	});
 
 };
-
 departmentCtrl.deleteAll=(req, res) =>{
 Department.deleteMany((err,department) => {
     if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
@@ -107,7 +101,6 @@ Department.deleteMany((err,department) => {
         res.status(200).send({message: 'Todos los departamentos han sido eliminados'})
     })
 };
-
 departmentCtrl.addDepartment=(req, res)=>{
     let department = new Department()
     department.item = req.body.item
@@ -150,7 +143,6 @@ departmentCtrl.updateOccupied=(req, res)=>{
     res.status(200).send({department: departmentUpdated})
     });
 };
-
 departmentCtrl.removeOccupied=(req,res)=>{
     var query=req.query
     Department.updateMany(query, {"$pull":req.body}, (err,departmentUpdated) => {
